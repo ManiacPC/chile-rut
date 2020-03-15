@@ -1,13 +1,13 @@
 ﻿{
-    "name": "malahierba/chile-rut",
-    "description": "Librería Laravel para el manejo y validación de RUT chileno",
+    "name": "maniacpc/chile-rut",
+    "description": "Librería de Laravel para la gestión y validación del Rol Único Tributario (RUT) chileno",
     "keywords": ["rut", "chile", "laravel"],
     "license" : "MIT",
     "authors": [
         {
-            "name": "malahierba team",
-            "email": "lab@malahierba.cl",
-            "homepage": "http://malahierba.cl"
+            "name": "Enrique Palacios",
+            "email": "epalaciosc@pixisproti.cl",
+            "homepage": "https://www.pixisproti.cl"
         }
     ],
     "require": {
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Malahierba\\ChileRut\\": "src/"
+            "ManiacPC\\ChileRut\\": "src/"
         }
     }
 }

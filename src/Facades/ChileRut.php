@@ -1,4 +1,5 @@
-<?php namespace Malahierba\ChileRut\Facades;
+<?php
+namespace ManiacPC\ChileRut\Facades;
  
 use Illuminate\Support\Facades\Facade;
  
@@ -9,6 +10,6 @@ class ChileRut extends Facade {
    *
    * @return string
    */
-  protected static function getFacadeAccessor() { return 'chilerut'; }
+  protected static function getFacadeAccessor() { return 'libchilerut'; }
  
 }

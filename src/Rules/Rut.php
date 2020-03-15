@@ -9,15 +9,11 @@ use ManiacPC\ChileRut\ChileRut;
  *
  * Validation rule to chilean RUT
  */
-class ValidChileanRut implements Rule
+class Rut implements Rule
 {
+    private static $instance;
 
-    /**
-     * @var ChileRut $chileRUT
-     */
-    private $chileRUT;
-
-
+    protected $required;
     /**
      * Create a new rule instance.
      *
@@ -25,11 +21,26 @@ class ValidChileanRut implements Rule
      *
      * @return void
      */
-    public function __construct(ChileRut $chileRUT)
+    public function __construct(bool $required = true)
     {
-        $this->chileRUT = $chileRUT;
+        $this->required = $required;
     }
 
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new Rut();
+        }
+
+        return self::$instance;
+    }
+
+    public function nullable(): self
+    {
+        $this->required = false;
+
+        return $this;
+    }
 
     /**
      * Determine if the validation rule passes.
@@ -41,7 +52,11 @@ class ValidChileanRut implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $this->chileRUT->check($value);
+        if (! $this->required && ($value === '0' || $value === 0 || $value === null)) {
+            return true;
+        }
+
+        return (new chileRUT())->check($value);
     }
 
 

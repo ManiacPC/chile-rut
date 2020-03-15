@@ -1,7 +1,8 @@
-<?php namespace Malahierba\ChileRut;
+<?php
+namespace ManiacPC\ChileRut;
 
 class ChileRut {
-	
+    
 	/**
 	 * Valida un RUT
 	 *
