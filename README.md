@@ -3,7 +3,7 @@
 
 Package pensado para validar y dar formato fácilmente al identificador **Rol Único Nacional** (**RUN**) para personas naturales y/o jurídicas de Chile, en el contexto del uso de Laravel Framework. 
 
-Este package es un derivado de [MalaHierba\ChileRut](https://github.com/malahierba-lab/chile-rut), que surge como necesidad de cubrir ciertos requerimientos específicos que surgieron en proyectos de desarrollo.
+Este package es un derivado de [MalaHierba\ChileRut](https://github.com/malahierba-lab/chile-rut), que nace como necesidad de cubrir ciertos requerimientos específicos que surgieron en proyectos de desarrollo.
 
 Este package sólo valida que el formato y datos del RUT sean correctos. No implica su real existencia.
 
