@@ -1,14 +1,11 @@
-# Chile Rut
 
-## Introducción
+# Validación de RUT chileno para Laravel 5.x - 6.x
 
-Esta librería permite trabajar con el número de identificación que se utiliza en chile para personas, tanto naturales como jurídicas, pudiendo realizar las tareas de validación y formato.
+Package pensado para validar y dar formato fácilmente al identificador **Rol Único Nacional** (**RUN**) para personas naturales y/o jurídicas de Chile, en el contexto del uso de Laravel Framework. 
 
-Se ha desarrollado pensando en **Laravel**.
+Este package es un derivado de [MalaHierba\ChileRut](https://github.com/malahierba-lab/chile-rut), que surge como necesidad de cubrir ciertos requerimientos específicos que surgieron en proyectos de desarrollo.
 
-### Aclaración sobre el alcance
-
-Sólo valida el número de identificación respecto a cumplir con el algoritmo que se utiliza, **no comprueba la existencia real de dicho rut**.
+Este package sólo valida que el formato y datos del RUT sean correctos. No implica su real existencia.
 
 ## Instalación
 
@@ -68,18 +65,33 @@ Recuerda que en caso de no usar el Facade, debes usar la clase misma:
       else
         echo 'es falso';
 
-### Validar un RUT con Laravel
+### Validación de RUT con Laravel
 
-Ejemplo de validación de petición usando regla de validación personalizada:
+Se puede utilizar una validación personalizada, según sea la necesidad:
 
+**Por medio del validador registrado**
 ```
-use Malahierba\ChileRut\ChileRut;
-use Malahierba\ChileRut\Rules\ValidChileanRut;
-
 $request->validate([
-    'rut' => ['required', 'string', new ValidChileanRut(new ChileRut)],
+    'rut' => 'required|string|rut',
 ]);
 ```
+**Por medio de reglas (RUT obligatorio)**
+```
+use ManiacPC\ChileRut\Rules\Rut;
+
+$request->validate([
+    'rut' => ['required', 'string', new Rut()],
+]);
+```
+**Por medio de reglas (RUT puede ser nulo)**
+```
+use ManiacPC\ChileRut\Rules\Rut;
+
+$request->validate([
+    'rut' => ['string', (new Rut())->nullable()],
+]);
+```
+
 
 > Ref: [Laravel: Custom Validation Rules](https://laravel.com/docs/validation#custom-validation-rules)
 
@@ -89,17 +101,22 @@ En caso de que tengamos un rut sin digito verificador y necesitemos calcularlo, 
 
     $digitoVerificador = RUT::digitoVerificador($rut);
 
-OBS: considerando el caso en que el dígito verificador sea 'K', se determinó que esta función siempre devuelve un string para ser consistentes con su uso y poder realizar comparaciones con mayor control.
+> OBS: considerando el caso en que el dígito verificador sea 'K', se
+> determinó que esta función siempre devuelve un string para ser
+> consistentes con su uso y poder realizar comparaciones con mayor
+> control.
 
 ## Formatos de RUT soportados
 
 Si tenemos un rut de la forma: x.xxx.xxx-x son soportados los siguientes formatos para trabajar con él:
+|Formato|Descripción  |
+|--|--|
+|x.xxx.xxx-y  | con separador de miles y con guión  |
+|xxxxxxx-y    | sin separador de miles y con guión  |
+|xxxxxxx      | sin separador de miles y sin guión / dígito verificador  |
 
-- x.xxx.xxx-x (con separador de miles y con guión)
-- xxxxxxx-x (sin separador de miles y con guión)
-- xxxxxxx (sin separador de miles y sin guión)
+> Nota: Cualquiera sea el formato podrá comenzar con cero(s). Ej: 0x.xxx.xxx-x está soportado.
 
-OBS: Cualquiera sea el formato podrá comenzar con cero(s). Ej: 0x.xxx.xxx-x está soportado.
 
 ## Licencia
 
