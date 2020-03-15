@@ -50,33 +50,33 @@ Si no deseas usar un Facade, sino la clase misma, no olvides incorporarlo en la 
 ### Validar un rut
 
 Para validar un rut chileno simplemente usas: RUT::check($rut_a_validar). Ej:
-
+```php
     if (RUT::check('12.345.678-9'))
       echo 'es verdadero';
     else
       echo 'es falso';
-
+```
 Recuerda que en caso de no usar el Facade, debes usar la clase misma:
-
+```php
     $chilerut = new ChileRut; //o \Malahierba\ChileRut\ChileRut en caso de que no hayas importado la clase
 
     if ($chilerut::check('12.345.678-9'))
         echo 'es verdadero';
       else
         echo 'es falso';
-
+```
 ### Validación de RUT con Laravel
 
 Se puede utilizar una validación personalizada, según sea la necesidad:
 
 **Por medio del validador registrado**
-```
+```php
 $request->validate([
     'rut' => 'required|string|rut',
 ]);
 ```
 **Por medio de reglas (RUT obligatorio)**
-```
+```php
 use ManiacPC\ChileRut\Rules\Rut;
 
 $request->validate([
@@ -84,7 +84,7 @@ $request->validate([
 ]);
 ```
 **Por medio de reglas (RUT puede ser nulo)**
-```
+```php
 use ManiacPC\ChileRut\Rules\Rut;
 
 $request->validate([
@@ -98,9 +98,9 @@ $request->validate([
 ### Calcular dígito verificador
 
 En caso de que tengamos un rut sin digito verificador y necesitemos calcularlo, se usa: RUT::digitoVerificador($rut). Ej:
-
+```php
     $digitoVerificador = RUT::digitoVerificador($rut);
-
+```
 > OBS: considerando el caso en que el dígito verificador sea 'K', se
 > determinó que esta función siempre devuelve un string para ser
 > consistentes con su uso y poder realizar comparaciones con mayor
@@ -111,11 +111,11 @@ En caso de que tengamos un rut sin digito verificador y necesitemos calcularlo, 
 Si tenemos un rut de la forma: x.xxx.xxx-x son soportados los siguientes formatos para trabajar con él:
 |Formato|Descripción  |
 |--|--|
-|x.xxx.xxx-y  | con separador de miles y con guión  |
-|xxxxxxx-y    | sin separador de miles y con guión  |
+|x.xxx.xxx-z  | con separador de miles y con guión  |
+|xxxxxxx-z    | sin separador de miles y con guión  |
 |xxxxxxx      | sin separador de miles y sin guión / dígito verificador  |
 
-> Nota: Cualquiera sea el formato podrá comenzar con cero(s). Ej: 0x.xxx.xxx-x está soportado.
+> Nota: Cualquiera sea el formato podrá comenzar con cero(s). Ej: 0x.xxx.xxx-z está soportado.
 
 
 ## Licencia
