@@ -1,4 +1,5 @@
 
+# (EN DESARROLLO: NO ESTABLE PARA SU USO - DOCUMENTACIÓN SIN COMPLETAR)
 # Validación de RUT chileno para Laravel 5.x - 6.x
 
 Package pensado para validar y dar formato fácilmente al identificador **Rol Único Nacional** (**RUN**) para personas naturales y/o jurídicas de Chile, en el contexto del uso de Laravel Framework. 
